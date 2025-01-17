@@ -29,21 +29,28 @@ function exibirAmigos() {
 }
 
 function sortearAmigo() {
-  if (nomes.length > 1) {
-    let sorteio = Math.floor(Math.random() * nomes.length );
+  if (nomes.length > 0) { 
+    let sorteio = Math.floor(Math.random() * nomes.length);
     let nomeSorteado = nomes[sorteio];
-    console.log(nomeSorteado)
+    console.log(nomeSorteado);
+
     let resultado = document.getElementById("resultado");
     let listaResultado = document.createElement("li");
     listaResultado.innerText = nomeSorteado;
     resultado.appendChild(listaResultado);
-    nomes = [];
-    limparTela()
+  
+    nomes.splice(sorteio, 1);
+
+    if (nomes.length === 0) {
+      alert("Todos os nomes foram sorteados!");
+      limparTela();
+    }
   } else {
-    alert("A lista está vazia")
+    alert("Todos os nomes já foram sorteados ou a lista está vazia!");
   }
 }
 function limparTela() {
-    const limparListaAmigos = document.getElementById("listaAmigos");
-    limparListaAmigos.innerHTML = '';
+  nomes = []; 
+  document.getElementById("listaAmigos").innerHTML = "";
+  document.getElementById("resultado").innerHTML = ""; 
 }
